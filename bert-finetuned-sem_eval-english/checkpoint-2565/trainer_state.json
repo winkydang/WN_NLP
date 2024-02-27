@@ -1,0 +1,79 @@
+{
+  "best_metric": 0.7058530510585306,
+  "best_model_checkpoint": "bert-finetuned-sem_eval-english/checkpoint-2565",
+  "epoch": 3.0,
+  "global_step": 2565,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.58,
+      "learning_rate": 1.7660818713450293e-05,
+      "loss": 0.4102,
+      "step": 500
+    },
+    {
+      "epoch": 1.0,
+      "eval_accuracy": 0.27313769751693,
+      "eval_f1": 0.6739869281045753,
+      "eval_loss": 0.3222099244594574,
+      "eval_roc_auc": 0.7735217130427117,
+      "eval_runtime": 30.0805,
+      "eval_samples_per_second": 29.454,
+      "eval_steps_per_second": 3.69,
+      "step": 855
+    },
+    {
+      "epoch": 1.17,
+      "learning_rate": 1.5321637426900587e-05,
+      "loss": 0.3227,
+      "step": 1000
+    },
+    {
+      "epoch": 1.75,
+      "learning_rate": 1.2982456140350879e-05,
+      "loss": 0.2859,
+      "step": 1500
+    },
+    {
+      "epoch": 2.0,
+      "eval_accuracy": 0.29683972911963885,
+      "eval_f1": 0.7046370967741935,
+      "eval_loss": 0.3064657151699066,
+      "eval_roc_auc": 0.7965002530323463,
+      "eval_runtime": 34.7642,
+      "eval_samples_per_second": 25.486,
+      "eval_steps_per_second": 3.193,
+      "step": 1710
+    },
+    {
+      "epoch": 2.34,
+      "learning_rate": 1.0643274853801172e-05,
+      "loss": 0.2572,
+      "step": 2000
+    },
+    {
+      "epoch": 2.92,
+      "learning_rate": 8.304093567251463e-06,
+      "loss": 0.2425,
+      "step": 2500
+    },
+    {
+      "epoch": 3.0,
+      "eval_accuracy": 0.27200902934537247,
+      "eval_f1": 0.7058530510585306,
+      "eval_loss": 0.3061399459838867,
+      "eval_roc_auc": 0.7990506177558241,
+      "eval_runtime": 37.0995,
+      "eval_samples_per_second": 23.882,
+      "eval_steps_per_second": 2.992,
+      "step": 2565
+    }
+  ],
+  "max_steps": 4275,
+  "num_train_epochs": 5,
+  "total_flos": 1349474086052352.0,
+  "trial_name": null,
+  "trial_params": null
+}
