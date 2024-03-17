@@ -1,4 +1,4 @@
-/yq_cls/data/
+/yq_cls/tmp/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,3 +131,5 @@ dmypy.json
 .pyre/
 
 content
+/yq_cls/tmp/save/
+/yq_cls/tmp/
