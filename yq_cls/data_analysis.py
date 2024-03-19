@@ -23,8 +23,8 @@ plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 # 或者增加图表大小
 plt.figure(figsize=(10, 8))  # 设置图表的尺寸，plt.figure(figsize=(宽度, 高度))
 
-# # 调整字体大小
-# plt.xticks(rotation=90, fontsize=8)
+# 调整字体大小
+plt.xticks(rotation=90, fontsize=8)
 
 
 # # 一、文本长度分布
@@ -82,7 +82,7 @@ plt.figure(figsize=(10, 8))  # 设置图表的尺寸，plt.figure(figsize=(宽�
 # file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data/yq_clear_50w.csv')
 # plot_length(file_path, title)
 
-
+#
 # # 二、对文本长度进行限制过滤
 # def length_limit(path, length):
 #     """
@@ -97,7 +97,7 @@ plt.figure(figsize=(10, 8))  # 设置图表的尺寸，plt.figure(figsize=(宽�
 #
 #     # 删除长度列，只留下需要的列
 #     df = df.drop(['len_content', 'num_sentence'], axis=1)
-#     df.to_csv(path, index=True)
+#     df.to_csv(path, index=False)
 #     print("过滤后的数量", len(df))
 #
 #
