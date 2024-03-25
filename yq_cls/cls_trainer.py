@@ -64,11 +64,15 @@ class ClsTrainer:
             valid_dataset, sampler=self.valid_sampler, batch_size=self.config.bs, num_workers=self.config.n_jobs, pin_memory=True,
             collate_fn=PadBatchSeq(self.tokz.pad_token_id))
 
-    def state_dict(self):
+    def model_state_dict(self):
         return self.model.state_dict()
+
+    def optimizer_state_dict(self):
+        return self.optimizer.state_dict()
         
-    def load_state_dict(self, state_dict):
-        self.model.load_state_dict(state_dict)
+    def load_state_dict(self, model_state_dict, optimizer_state_dict):
+        self.model.load_state_dict(model_state_dict)
+        self.optimizer.load_state_dict(optimizer_state_dict)
 
     def _eval_train(self, epoch):  # 在给定的训练周期（epoch）内评估（通常实际上是执行训练）模型的性能
         self.model.train()  # Set the model to training mode 将模型设置为训练模式，这意味着启动BatchNormalization和dropout，这些在训练时需要，在评估模式时不需要。
@@ -149,7 +153,7 @@ class ClsTrainer:
         print(f"Epoch: {epoch}, Step: {step}, Avg loss: {avg_loss}, Accuracy: {accuracy}")
         # 可能还想将这些指标记录到日志文件或tensorboard等
 
-    def train(self, start_epoch, epochs, after_epoch_funcs=[], after_step_funcs=[]):
+    def train(self, start_epoch, epochs, after_epoch_funcs=[]):
         # Train the model
         for epoch in range(start_epoch + 1, epochs):
             self.logger.info('Training on epoch'.format(epoch))

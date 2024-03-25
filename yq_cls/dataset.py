@@ -31,7 +31,7 @@ class EmotionDataset(Dataset):
         #########################################
         for path in paths:
             # df = pd.read_csv(path, sep='\t', names=['Label', 'Text'])
-            df = pd.read_csv(path, names=['Label', 'Text'])
+            df = pd.read_csv(path, names=['Label', 'Text', 'text_split'], header=None)
             for _, row in df.iterrows():
                 label = label_vocab[str(row[0])]
                 text = row[1]

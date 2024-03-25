@@ -16,9 +16,9 @@ import utils
 
 parser = argparse.ArgumentParser()
 # Setup the parameter parser
+parser.add_argument('--bert_token_path', help='bert_token_path', default=os.path.join(utils.BASE_DIR, 'tmp/models/bert-base-chinese'))
 parser.add_argument('--bert_path', help='bert_path', default=os.path.join(utils.BASE_DIR, 'tmp/models/bert-base-chinese'))
-# parser.add_argument('--bert_path', help='config file', default='/home/data/tmp/bert-base-chinese')
-# parser.add_argument('--save_path', help='training file', default='/home/data/tmp/NLP_Course/Emotion_classification/train')
+parser.add_argument('--ckpt_path', help='bert_path', default=os.path.join(utils.BASE_DIR, 'tmp/save/train/model-19.ckpt'))
 parser.add_argument('--save_path', help='save_path', default=os.path.join(utils.BASE_DIR, 'tmp/save'))
 parser.add_argument('--train_file', help='training file', default=os.path.join(utils.BASE_DIR, 'tmp/data/train.csv'))
 parser.add_argument('--valid_file', help='valid file', default=os.path.join(utils.BASE_DIR, 'tmp/data/test.csv'))
@@ -32,7 +32,7 @@ parser.add_argument('--bs', type=int, default=70)
 parser.add_argument('--batch_split', type=int, default=1)
 parser.add_argument('--eval_steps', type=int, default=40)
 parser.add_argument('--n_epochs', type=int, default=30)
-parser.add_argument('--max_length', type=int, default=90)
+parser.add_argument('--max_length', type=int, default=512)
 parser.add_argument('--seed', type=int, default=123)
 parser.add_argument('--n_jobs', type=int, default=1, help='num of workers to process data')
 
@@ -43,7 +43,7 @@ args = parser.parse_args()
 # Setup for the GPU
 os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
-from transformers import BertConfig, BertTokenizer
+from transformers import BertConfig, BertTokenizer, BertForSequenceClassification
 from model import EmotionCLS
 import dataset
 import utils
@@ -58,7 +58,11 @@ log_path = os.path.join(args.save_path, 'log')
 
 def save_func(epoch, device):
     filename = utils.get_ckpt_filename('model', epoch)
-    torch.save(trainer.state_dict(), os.path.join(train_path, filename))
+    checkpoint = {
+        'model_state_dict': trainer.model_state_dict(),
+        'optimizer_state_dict': trainer.optimizer_state_dict()
+    }
+    torch.save(checkpoint, os.path.join(train_path, filename))
 
 
 # 判断文件夹是否存在，不存在的话就先创建好
@@ -90,9 +94,10 @@ try:
         torch.manual_seed(args.seed)
     else:
         device = torch.device("cuda", 0)
-    
+
     # Init the tokenizer
-    tokz = BertTokenizer.from_pretrained(args.bert_path)
+    # tokz = BertTokenizer.from_pretrained(args.bert_path)
+    tokz = BertTokenizer.from_pretrained(args.bert_token_path)
     _, label2index, _ = utils.load_vocab(args.label_vocab)
     # Init the dataset
     train_dataset = dataset.EmotionDataset([args.train_file], tokz, label2index, logger, max_lengths=args.max_length)
@@ -101,8 +106,9 @@ try:
     # Init the model
     logger.info('Building models, rank {}'.format(args.local_rank))
     bert_config = BertConfig.from_pretrained(args.bert_path)
-    bert_config.num_labels = 8
+    bert_config.num_labels = 3  # 输出的类别数
     model = EmotionCLS.from_pretrained(args.bert_path, config=bert_config).to(device)
+    # # model.to(device)
 
     # Setup for distrbuted training
     if distributed:
@@ -110,9 +116,17 @@ try:
 
     # Init the trainer
     trainer = ClsTrainer(args, model, tokz, train_dataset, valid_dataset, log_path, logger, device, distributed=distributed)
+    # load the checkpoint for the model
+    checkpoint = torch.load(args.ckpt_path)
+    print("checkpoint.keys(): ", checkpoint.keys())
+    model_state_dict = checkpoint['model_state_dict']
+    optimizer_state_dict = checkpoint['optimizer_state_dict']
+    trainer.load_state_dict(model_state_dict, optimizer_state_dict)
+    print(f'successfully load model_state_dict and optimizer_state_dict from {args.bert_path}')
 
     # Start the training
-    start_epoch = 0
+    # start_epoch = 0
+    start_epoch = 19
     if args.local_rank in [-1, 0]:
         trainer.train(start_epoch, args.n_epochs, after_epoch_funcs=[save_func])
     else:

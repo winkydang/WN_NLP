@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="root@region-46.seetacloud.com:30194 password" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="root@connect.bjb1.seetacloud.com:21404 password (4)" remoteFilesAllowedToDisappearOnAutoupload="false" compareModeInSync="TEXT">
     <serverData>
-      <paths name="root@region-46.seetacloud.com:30194 password">
+      <paths name="root@connect.bjb1.seetacloud.com:21404 password (4)">
         <serverdata>
           <mappings>
-            <mapping deploy="/root/yq_cls" local="$PROJECT_DIR$/yq_cls" />
+            <mapping deploy="/root/autodl-tmp/yq_cls" local="$PROJECT_DIR$/yq_cls" />
           </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/yq_cls/tmp" />
+          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>
