@@ -90,7 +90,7 @@ class ClsTrainer:
             # 4. TODO complete the code to train the model #
             ################################################
             # pass
-            # move the input and target data to the correct device (e.g. GPU)
+            # move the input and target data_1 to the correct device (e.g. GPU)
             inputs, labels = data['utt'].to(self.device), data['label'].to(self.device)
             outputs = self.model(inputs)  # 前向传播，计算模型输出  # return loss, logits
             loss_value = self.criterion(outputs[1], labels)  # 计算损失
@@ -157,7 +157,7 @@ class ClsTrainer:
         # Train the model
         for epoch in range(start_epoch + 1, epochs):
             self.logger.info('Training on epoch'.format(epoch))
-            # Reshuffle the train data in each epoch
+            # Reshuffle the train data_1 in each epoch
             if hasattr(self.train_sampler, 'set_epoch'):
                 self.train_sampler.set_epoch(epoch)
             # Call the training function

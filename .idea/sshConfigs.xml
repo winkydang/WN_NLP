@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="region-42.seetacloud.com" id="f4f409b1-a9e4-4514-afea-b1485cfc31b6" port="42268" customName="testProject_1_regionA_673" nameFormat="CUSTOM" username="root" useOpenSSHConfig="true">
+        <option name="customName" value="testProject_1_regionA_673" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

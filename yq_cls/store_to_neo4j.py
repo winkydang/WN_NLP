@@ -15,7 +15,7 @@ print(graph)
 # --------------------------- 创建实体
 # 公司
 print('创建 公司 实体...')
-company_basic = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/data/yq_1k.csv'), encoding='utf-8')
+company_basic = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/data_1/yq_1k.csv'), encoding='utf-8')
 for idx, each_row in tqdm(company_basic.iterrows()):
     # 方法说明：https://py2neo.org/2021.1/data/index.html#py2neo.data.Node
     # 公司 是 label
@@ -27,11 +27,11 @@ for idx, each_row in tqdm(company_basic.iterrows()):
         # 方法说明：https://py2neo.org/2021.1/workflow.html#py2neo.Transaction.create
         graph.create(each_company)
     except Exception as e:
-        print(f'Error: {e}, data idx: {idx}, data: {each_row}')
+        print(f'Error: {e}, data_1 idx: {idx}, data_1: {each_row}')
 
 # 概念
 print('创建 新闻 实体...')
-news = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/data/yq_1k.csv'), encoding='utf-8')
+news = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/data_1/yq_1k.csv'), encoding='utf-8')
 for idx, each_row in tqdm(news.iterrows()):
     each_news = Node('新闻',
                         新闻标题=each_row['TITLE'],
@@ -48,7 +48,7 @@ matcher = NodeMatcher(graph)
 
 # 股票-概念
 print('创建 公司-新闻 关系...')
-company_news = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/data/yq_1k.csv'), encoding='utf-8')
+company_news = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/data_1/yq_1k.csv'), encoding='utf-8')
 for idx, each_row in tqdm(company_news.iterrows()):
     # first() 方法返回第一个匹配的 Node，如果找不到则返回 None
     node1 = matcher.match('公司', 公司名称=each_row['COMPANYNAME']).first()

@@ -16,9 +16,9 @@ train_data = dataset['train']
 
 # 方式1：先转成 dataframe 类型，再将df存成json文件
 df_train = pd.DataFrame(train_data)
-df_train.to_json('./data/train_sem_1.json', orient='records', lines=True)
+df_train.to_json('./data_1/train_sem_1.json', orient='records', lines=True)
 
-df_train.to_csv('./data/train_sem_1.csv', index=False)
+df_train.to_csv('./data_1/train_sem_1.csv', index=False)
 print()
 
 

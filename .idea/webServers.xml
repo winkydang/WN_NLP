@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="088032fb-49b9-42ca-adcf-508fc25493df" name="testProject_1_regionA_673">
+        <fileTransfer accessType="SFTP" host="region-42.seetacloud.com" port="42268" sshConfigId="f4f409b1-a9e4-4514-afea-b1485cfc31b6" sshConfig="testProject_1_regionA_673">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="99e8e830-01db-4b86-83ea-a560f44070c1" name="test_2_regionA_258">
+        <fileTransfer accessType="SFTP" host="region-41.seetacloud.com" port="34392" sshConfigId="61169530-f0e8-497a-8860-bbc914267cfe" sshConfig="testProject_2_regionA_258">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
