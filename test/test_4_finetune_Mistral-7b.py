@@ -74,7 +74,7 @@ from datasets import load_dataset
 
 data = load_dataset("gbharti/finance-alpaca", split="train")
 
-# Explore the data_1
+# Explore the data
 df = data.to_pandas()
 print(df.head(10))
 
@@ -110,7 +110,7 @@ def generate_prompt(data_point):
 text_column = [generate_prompt(data_point) for data_point in data]
 data = data.add_column("prompt", text_column)
 
-# tokenize our data_1 so the model can understand.
+# tokenize our data so the model can understand.
 data = data.shuffle(seed=1234)  # Shuffle dataset here
 data = data.map(lambda samples: tokenizer(samples["prompt"]), batched=True)
 
@@ -170,10 +170,10 @@ notebook_login()
 #
 # for the reason of demo, we just ran it for few steps (100) just to showcase how to use this integration with existing tools on the HF ecosystem.
 # from datasets import load_dataset
-# data_1 = load_dataset("ronal999/finance-alpaca-demo", split='train')
-# data_1 = data_1.train_test_split(test_size=0.1)
-# train_data = data_1["train"]
-# test_data = data_1["test"]
+# data = load_dataset("ronal999/finance-alpaca-demo", split='train')
+# data = data.train_test_split(test_size=0.1)
+# train_data = data["train"]
+# test_data = data["test"]
 
 # import transformers
 

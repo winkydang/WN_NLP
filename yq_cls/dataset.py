@@ -19,15 +19,15 @@ class EmotionDataset(Dataset):
         self.logger = logger
         self.label_vocab = label_vocab
         self.max_lengths = max_lengths
-        # Read all the data_1 into memory
+        # Read all the data into memory
         self.data = EmotionDataset.make_dataset(paths, tokz, label_vocab, logger, max_lengths)
 
     @staticmethod
     def make_dataset(paths, tokz, label_vocab, logger, max_lengths):
-        logger.info('reading data_1 from {}'.format(paths))
+        logger.info('reading data from {}'.format(paths))
         dataset = []
         #########################################
-        # TODO 2. Read all the data_1 into memory #
+        # TODO 2. Read all the data into memory #
         #########################################
         for path in paths:
             # df = pd.read_csv(path, sep='\t', names=['Label', 'Text'])

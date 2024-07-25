@@ -20,9 +20,9 @@ parser.add_argument('--bert_token_path', help='bert_token_path', default=os.path
 parser.add_argument('--bert_path', help='bert_path', default=os.path.join(utils.BASE_DIR, 'tmp/models/bert-base-chinese'))
 parser.add_argument('--ckpt_path', help='bert_path', default=os.path.join(utils.BASE_DIR, 'tmp/save/train/model-19.ckpt'))
 parser.add_argument('--save_path', help='save_path', default=os.path.join(utils.BASE_DIR, 'tmp/save'))
-parser.add_argument('--train_file', help='training file', default=os.path.join(utils.BASE_DIR, 'tmp/data_1/train.csv'))
-parser.add_argument('--valid_file', help='valid file', default=os.path.join(utils.BASE_DIR, 'tmp/data_1/test.csv'))
-parser.add_argument('--label_vocab', help='label_vocab', default=os.path.join(utils.BASE_DIR, 'tmp/data_1/label_vocab'))
+parser.add_argument('--train_file', help='training file', default=os.path.join(utils.BASE_DIR, 'tmp/data/train.csv'))
+parser.add_argument('--valid_file', help='valid file', default=os.path.join(utils.BASE_DIR, 'tmp/data/test.csv'))
+parser.add_argument('--label_vocab', help='label_vocab', default=os.path.join(utils.BASE_DIR, 'tmp/data/label_vocab'))
 
 parser.add_argument("--local_rank", help='used for distributed training', type=int, default=-1)
 
@@ -34,7 +34,7 @@ parser.add_argument('--eval_steps', type=int, default=40)
 parser.add_argument('--n_epochs', type=int, default=30)
 parser.add_argument('--max_length', type=int, default=512)
 parser.add_argument('--seed', type=int, default=123)
-parser.add_argument('--n_jobs', type=int, default=1, help='num of workers to process data_1')
+parser.add_argument('--n_jobs', type=int, default=1, help='num of workers to process data')
 
 parser.add_argument('--gpu', help='which gpu to use', type=str, default='0')
 

@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 知识语料路径
-entity_corpus_path = '../data_1/knowledge/'
+entity_corpus_path = '../data/knowledge/'
 
 # 实体搜索器存储路径
 entity_searcher_save_path = '../checkpoints/entity_searcher/search_tree.pkl'
@@ -12,7 +12,7 @@ entity_searcher_save_path = '../checkpoints/entity_searcher/search_tree.pkl'
 entity_searcher_load_path = './checkpoints/entity_searcher/search_tree.pkl'
 
 # 分类器语料路径
-classifier_corpus_path = '../data_1/classifier/chat.train'
+classifier_corpus_path = '../data/classifier/chat.train'
 
 # 分类器模型存储路径
 classifier_save_path = '../checkpoints/classifier/model.bin'

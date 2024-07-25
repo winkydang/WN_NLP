@@ -23,7 +23,7 @@ def cleaned_text(text):  # 清洗数据
     return sentences
 
 
-df = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/yq_50w.csv'))
+df = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/tmp/data/yq_50w.csv'))
 
 col = ['EMORATE', 'CONTENT']  # 存储需要用到的两列
 
@@ -38,9 +38,9 @@ df_save.loc[:, 'CONTENT_CLEANED'] = df_save['CONTENT'].apply(cleaned_text)
 # train_data, test_data = train_test_split(df_save[['EMORATE', 'CONTENT_CLEANED']], shuffle=True, test_size=0.2, random_state=42)
 
 # 定义训练集和测试集的保存路径
-# train_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/train.csv')
-# test_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/test.csv')
-yq_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/yq_clear_50w.csv')
+# train_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data/train.csv')
+# test_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data/test.csv')
+yq_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data/yq_clear_50w.csv')
 
 # train_data.to_csv(train_file_path, index=False, header=False)  # index=False, header=False，不要索引，不要列名
 # test_data.to_csv(test_file_path, index=False, header=False)
@@ -48,7 +48,7 @@ df_save.to_csv(yq_file_path, index=False)  # 保存全部数据，包括进行�
 
 
 # # step2: 数据预处理之后，分割训练集和验证集
-# df = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/yq_clear_50w.csv'))
+# df = pd.read_csv(os.path.join(BASE_DIR, 'yq_cls/tmp/data/yq_clear_50w.csv'))
 # # 使用 sample() 函数随机抽取 20 万条数据
 # sample_df = df.sample(n=200000, random_state=42)
 # # 分割数据集，这里的test_size=0.2代表测试集占20%，训练集占80%
@@ -57,8 +57,8 @@ df_save.to_csv(yq_file_path, index=False)  # 保存全部数据，包括进行�
 # print('测试集数量：', len(test_data))
 #
 # # 定义训练集和测试集的保存路径
-# train_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/train.csv')
-# test_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data_1/test.csv')
+# train_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data/train.csv')
+# test_file_path = os.path.join(BASE_DIR, 'yq_cls/tmp/data/test.csv')
 #
 # train_data.to_csv(train_file_path, index=False, header=False)  # index=False, header=False，不要索引，不要列名
 # test_data.to_csv(test_file_path, index=False, header=False)
