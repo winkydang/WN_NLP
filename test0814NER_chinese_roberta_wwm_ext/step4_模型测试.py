@@ -1,3 +1,5 @@
+import traceback
+
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 import torch
 import json
@@ -15,30 +17,39 @@ def post_processing(outputs, text, labels_map):
     entity = ""
     type = ""
     for index, word_token in enumerate(text):
-        tag = predicted_tags[index]
-        if tag.startswith("B-"):
-            type = tag.split("-")[1]
-            if entity:
-                if type not in result:
-                    result[type] = []
-                result[type].append(entity)
-            entity = word_token
-        elif tag.startswith("I-"):
-            type = tag.split("-")[1]
-            if entity:
-                entity += word_token
-        else:
-            if entity:
-                if type not in result:
-                    result[type] = []
-                result[type].append(entity)
+        try:
+            if len(text) > 290:
+                text = text[:290]
+
+            tag = predicted_tags[index]
+            if tag.startswith("B-"):
+                type = tag.split("-")[1]
+                if entity:
+                    if type not in result:
+                        result[type] = []
+                    result[type].append(entity)
+                entity = word_token
+            elif tag.startswith("I-"):
+                type = tag.split("-")[1]
+                if entity:
+                    entity += word_token
+            else:
+                if entity:
+                    if type not in result:
+                        result[type] = []
+                    result[type].append(entity)
+                entity = ""
+        except Exception as e:
+            print(e, traceback.format_exc())
             entity = ""
+            continue
     return result
 
 def main():
-    labels_path = "./data/labels.json"
+    labels_path = "./data/processed/labels.json"
     model_name = './output'
     max_length = 300
+    # max_length = 500
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # 加载label
@@ -68,6 +79,8 @@ def main():
         outputs = model(input_ids, attention_mask=attention_mask)
         result = post_processing(outputs, text, labels_map)
         print(result)
+        print(result['company'] if 'company' in result.keys() else '')
+
 
 
 if __name__ == '__main__':

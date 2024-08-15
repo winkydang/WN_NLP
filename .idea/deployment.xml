@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" remoteFilesAllowedToDisappearOnAutoupload="false" compareModeInSync="TEXT">
+  <component name="PublishConfigData" autoUpload="Always" serverName="test0814_NER_RegionA_650" remoteFilesAllowedToDisappearOnAutoupload="false" compareModeInSync="TEXT">
     <serverData>
+      <paths name="test0814_NER_RegionA_650">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/root/autodl-tmp/test0814NER_chinese_roberta_wwm_ext" local="$PROJECT_DIR$/test0814NER_chinese_roberta_wwm_ext" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/root/autodl-tmp/test0814NER_chinese_roberta_wwm_ext/model" />
+            <excludedPath local="true" path="$PROJECT_DIR$/test0814NER_chinese_roberta_wwm_ext/model" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
       <paths name="testProject_1_regionA_673">
         <serverdata>
           <mappings>

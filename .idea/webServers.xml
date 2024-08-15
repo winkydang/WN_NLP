@@ -12,6 +12,13 @@
       <webServer id="99e8e830-01db-4b86-83ea-a560f44070c1" name="test_2_regionA_258">
         <fileTransfer accessType="SFTP" host="region-41.seetacloud.com" port="34392" sshConfigId="61169530-f0e8-497a-8860-bbc914267cfe" sshConfig="testProject_2_regionA_258">
           <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="51c40442-68b5-4c7f-924f-629db369745f" name="test0814_NER_RegionA_650">
+        <fileTransfer accessType="SFTP" host="connect.beijinga.seetacloud.com" port="38267" sshConfigId="9483a94c-cc38-4289-9091-90f47105097e" sshConfig="test0814_NER_regionA_650">
+          <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>

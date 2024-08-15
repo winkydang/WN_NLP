@@ -137,4 +137,6 @@ content
 /data_1/
 /bert-finetuned-sem_eval-english/
 
-/0814-chinese-roberta-wwm-ext-微调/data
+/test0814NER_chinese_roberta_wwm_ext/data
+/test0814NER_chinese_roberta_wwm_ext/model
+/test0814NER_chinese_roberta_wwm_ext/output

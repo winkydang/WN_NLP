@@ -5,12 +5,13 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, AutoModelForTokenClassification
-from ner_datasets import NERDataset
 from tqdm import tqdm
 import json
 import time, sys
 import numpy as np
 from sklearn.metrics import f1_score
+
+from test0814NER_chinese_roberta_wwm_ext.step2nerdatasets import NERDataset
 
 
 def train(epoch, model, device, loader, optimizer, gradient_accumulation_steps):
@@ -70,16 +71,16 @@ def validate(model, device, loader):
 
 
 def main():
-    labels_path = "./data/labels.json"
-    model_name = 'D:\\AIGC\\model\\chinese-roberta-wwm-ext'
-    train_json_path = "./data/train.json"
-    val_json_path = "./data/dev.json"
+    labels_path = "./data/processed/labels.json"
+    model_name = './model/chinese-roberta-wwm-ext'
+    train_json_path = "./data/processed/train.json"
+    val_json_path = "./data/processed/dev.json"
     max_length = 300
     epochs = 5
     batch_size = 1
     lr = 1e-4
     gradient_accumulation_steps = 16
-    model_output_dir = "output"
+    model_output_dir = "./output"
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # 加载label

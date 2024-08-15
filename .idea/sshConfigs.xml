@@ -5,6 +5,9 @@
       <sshConfig authType="PASSWORD" host="region-42.seetacloud.com" id="f4f409b1-a9e4-4514-afea-b1485cfc31b6" port="42268" customName="testProject_1_regionA_673" nameFormat="CUSTOM" username="root" useOpenSSHConfig="true">
         <option name="customName" value="testProject_1_regionA_673" />
       </sshConfig>
+      <sshConfig authType="PASSWORD" host="connect.beijinga.seetacloud.com" id="9483a94c-cc38-4289-9091-90f47105097e" port="38267" customName="test0814_NER_regionA_650" nameFormat="CUSTOM" username="root" useOpenSSHConfig="true">
+        <option name="customName" value="test0814_NER_regionA_650" />
+      </sshConfig>
     </configs>
   </component>
 </project>

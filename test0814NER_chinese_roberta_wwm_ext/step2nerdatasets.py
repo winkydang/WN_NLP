@@ -58,12 +58,3 @@ class NERDataset(Dataset):
             'attention_mask': attention_mask,
             'labels': torch.LongTensor(label_ids)
         }
-
-
-
-
-
-
-
-
-

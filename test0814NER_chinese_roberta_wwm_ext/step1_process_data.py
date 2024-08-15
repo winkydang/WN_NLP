@@ -1,7 +1,7 @@
 """
 @Time    : 2024/8/14 22:25
 @Author  : winkydang
-@File    : 1_process_data.py
+@File    : step1_process_data.py
 将数据转换为 BIO 标注形式
 """
 import json
