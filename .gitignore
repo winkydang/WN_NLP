@@ -140,3 +140,6 @@ content
 /test0814NER_chinese_roberta_wwm_ext/data
 /test0814NER_chinese_roberta_wwm_ext/model
 /test0814NER_chinese_roberta_wwm_ext/output
+
+test0814NER_PROMPT/data
+
