@@ -63,7 +63,7 @@ file_path = './data/data_bloomberg20240814155117.csv'
 df = pd.read_csv(file_path)
 
 # 5. 应用函数到CONTENT列
-df['公司实体'] = df['content'].apply(extract_company_names)
+df['相关主体'] = df['content'].apply(extract_company_names)
 
 # 6. 保存结果到新的CSV文件
 # output_path = './data/output/result_0816_data_bloomberg.csv'

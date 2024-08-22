@@ -1,5 +1,5 @@
 import pandas as pd
-from transformers import BertTokenizer, BertForTokenClassification, AutoConfig
+from transformers import BertTokenizer, BertForTokenClassification, AutoConfig, BertTokenizerFast
 from transformers import pipeline
 
 # 1. 读取CSV文件
@@ -8,9 +8,9 @@ file_path = '../data/副本1副本.csv'
 df = pd.read_csv(file_path)
 
 # 2. 加载ERNIE模型和对应的分词器
-model_name = "nghuyong/ernie-3.0-base-zh"
+# model_name = "nghuyong/ernie-3.0-base-zh"
 # model_name = "bert-base-chinese"
-# model_name = "hfl/chinese-roberta-wwm-ext-large"
+model_name = "hfl/chinese-roberta-wwm-ext-large"
 
 config = AutoConfig.from_pretrained(model_name)
 print(config.id2label)  # 查看标签映射  # {0: 'LABEL_0', 1: 'LABEL_1'}
@@ -18,7 +18,8 @@ print(config.id2label)  # 查看标签映射  # {0: 'LABEL_0', 1: 'LABEL_1'}
 label_map = {0: "O", 1: "ORG"}  # 根据实际情况更新映射
 
 
-tokenizer = BertTokenizer.from_pretrained(model_name, use_fast=True)
+# tokenizer = BertTokenizer.from_pretrained(model_name, use_fast=True)
+tokenizer = BertTokenizerFast.from_pretrained(model_name, use_fast=True)
 model = BertForTokenClassification.from_pretrained(model_name)
 
 # 3. 使用Hugging Face的pipeline进行命名实体识别
@@ -29,13 +30,26 @@ nlp = pipeline("ner", model=model, tokenizer=tokenizer)
 def extract_companies(text):
     ner_results = nlp(text)
     print(ner_results)  # 输出NER结果，查看标签和文本
-    # companies = [result['word'] for result in ner_results if result['entity'] == 'B-ORG' or result['entity'] == 'I-ORG']
-    companies = [result['word'] for result in ner_results if label_map[int(result['entity'].split('_')[-1])] == 'ORG']
-    return '、'.join(companies)
+    # # companies = [result['word'] for result in ner_results if result['entity'] == 'B-ORG' or result['entity'] == 'I-ORG']
+    # companies = [result['word'] for result in ner_results if label_map[int(result['entity'].split('_')[-1])] == 'ORG']
+    entities = []
+    current_entity = []
+    for result in ner_results:
+        label = label_map[int(result['entity'].split('_')[-1])]
+        if label == 'ORG':
+            current_entity.append(result['word'])
+        else:
+            if current_entity:
+                entities.append(''.join(current_entity))
+                current_entity = []
+    # 如果最后一个实体未被添加到entities中，则添加
+    if current_entity:
+        entities.append(''.join(current_entity))
+    return '、'.join(entities)
 
 
 # # 5. 应用函数到CONTENT列
-# df['公司实体'] = df['content'].apply(extract_companies)
+# df['相关主体'] = df['content'].apply(extract_companies)
 #
 # # 6. 保存结果到新的CSV文件
 # output_path = '../data/副本1副本_带公司实体_ERNIE.csv'

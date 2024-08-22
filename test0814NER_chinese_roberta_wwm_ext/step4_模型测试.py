@@ -45,6 +45,7 @@ def post_processing(outputs, text, labels_map):
             continue
     return result
 
+
 def main():
     labels_path = "./data/processed/labels.json"
     model_name = './output'
@@ -80,7 +81,6 @@ def main():
         result = post_processing(outputs, text, labels_map)
         print(result)
         print(result['company'] if 'company' in result.keys() else '')
-
 
 
 if __name__ == '__main__':

@@ -64,7 +64,7 @@ def extract_companies(text):
 
 
 # 5. 应用函数到CONTENT列
-df['公司实体'] = df['content'].apply(extract_companies)
+df['相关主体'] = df['content'].apply(extract_companies)
 
 # 6. 保存结果到新的CSV文件
 output_path = './data/资讯data/res/副本1副本_带公司实体_ERNIE.csv'
