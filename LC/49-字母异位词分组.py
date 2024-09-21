@@ -25,5 +25,6 @@ class Solution:
             code[t] += 1
         return str(code)
 
+
 s = Solution()
 print(s.groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
