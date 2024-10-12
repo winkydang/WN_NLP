@@ -14,41 +14,45 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 
 # 使用 sentence-transformers库 获得句子的向量表示
+# TODO 可以尝试采用不同的embedding模型，比如BERT、OPENAI-api、bge、m3e等。并且也可以对词向量模型进行微调以取得更好的效果。
 def sentence_embedding(text):
     sent_embedding = model.encode(text)
     return sent_embedding
 
 
 paragraph = [paragraph['context'] for article in squad_data['data'] for paragraph in article['paragraphs']]
-# paragraph_vectors = [sentence_embedding(paragraph['context']) for article in squad_data['data'] for paragraph in article['paragraphs']]  # list:19035
-# # 使用tqdm库显示进度条
+
+# # paragraph_vectors = [sentence_embedding(paragraph['context']) for article in squad_data['data'] for paragraph in article['paragraphs']]  # list:19035
+# # # 使用tqdm库显示进度条
+# # paragraph_vectors = [sentence_embedding(paragraph['context'])
+# #                      for article in tqdm(squad_data['data'], desc='processing articles')
+# #                      for paragraph in tqdm(article['paragraphs'], desc='processing paragraphs', leave=False)]  # leave=False 是为了避免内循环的进度条在完成后仍然留在屏幕上。
+
+
 # paragraph_vectors = [sentence_embedding(paragraph['context'])
-#                      for article in tqdm(squad_data['data'], desc='processing articles')
-#                      for paragraph in tqdm(article['paragraphs'], desc='processing paragraphs', leave=False)]  # leave=False 是为了避免内循环的进度条在完成后仍然留在屏幕上。
-paragraph_vectors = [sentence_embedding(paragraph['context'])
-                     for article in tqdm(squad_data['data'], desc='processing articles')  # miniters=1: 每处理一次循环，刷新一次进度条。mininterval=0.5: 每0.5秒更新一次进度。
-                     for paragraph in article['paragraphs']]
+#                      for article in tqdm(squad_data['data'], desc='processing articles')  # miniters=1: 每处理一次循环，刷新一次进度条。mininterval=0.5: 每0.5秒更新一次进度。
+#                      for paragraph in article['paragraphs']]
 
 
-# 构建索引
-dimension = model.get_sentence_embedding_dimension()  # 384  # dimension 代表了每个段落向量的维度
-faiss_index = faiss.IndexFlatL2(dimension)  # 构建索引，这里使用的是 faiss 库的 IndexFlatL2 索引，它是最简单的索引，只需要指定维度即可。  # dimension 指的是每个向量的维度。
-
-# 将 NumPy 数组转换为 1 个二维数组
-# paragraph_vectors 是一个列表，里面存储了各个段落的向量。np.stack() 将这些向量堆叠成一个二维 NumPy 数组，每行代表一个段落的向量。astype('float32') 将数组转换为 float32 类型。
-paragraph_vectors = np.stack(paragraph_vectors).astype('float32')  # ndarray (19035, 110256)
-faiss_index.add(paragraph_vectors)
-
-# 存储FAISS索引到文件
-faiss.write_index(faiss_index, "../data/faiss_index_squad.faiss")
-
-# # 从文件中加载FAISS索引
-# index = faiss.read_index("index.faiss")
+# # 构建索引
+# dimension = model.get_sentence_embedding_dimension()  # 384  # dimension 代表了每个段落向量的维度
+# faiss_index = faiss.IndexFlatL2(dimension)  # 构建索引，这里使用的是 faiss 库的 IndexFlatL2 索引，它是最简单的索引，只需要指定维度即可。  # dimension 指的是每个向量的维度。
 #
-# # # 如果你的索引是在 GPU 上构建的，在加载时需要将索引重新传回到 GPU # 将CPU索引转换为GPU索引
-# # index_cpu = faiss.read_index("index.faiss")
-# # res = faiss.StandardGpuResources()
-# # index_gpu = faiss.index_cpu_to_gpu(res, 0, index_cpu)
+# # 将 NumPy 数组转换为 1 个二维数组
+# # paragraph_vectors 是一个列表，里面存储了各个段落的向量。np.stack() 将这些向量堆叠成一个二维 NumPy 数组，每行代表一个段落的向量。astype('float32') 将数组转换为 float32 类型。
+# paragraph_vectors = np.stack(paragraph_vectors).astype('float32')  # ndarray (19035, 110256)
+# faiss_index.add(paragraph_vectors)
+#
+# # 存储FAISS索引到文件
+# faiss.write_index(faiss_index, "../data/faiss_index_squad.faiss")
+
+# 从文件中加载FAISS索引
+faiss_index = faiss.read_index("../data/faiss_index_squad.faiss")
+
+# # 如果你的索引是在 GPU 上构建的，在加载时需要将索引重新传回到 GPU # 将CPU索引转换为GPU索引
+# index_cpu = faiss.read_index("index.faiss")
+# res = faiss.StandardGpuResources()
+# index_gpu = faiss.index_cpu_to_gpu(res, 0, index_cpu)
 
 
 # 相似性搜索
