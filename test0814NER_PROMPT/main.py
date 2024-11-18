@@ -1,4 +1,3 @@
-import openai
 from dotenv import load_dotenv, find_dotenv
 from openai import OpenAI
 
@@ -7,7 +6,7 @@ load_dotenv(find_dotenv())
 
 # 设置你的 OpenAI API 密钥
 # openai.api_key = 'your-api-key-here'
-openai = OpenAI()
+client = OpenAI()
 
 
 def extract_company_names(text):
@@ -15,7 +14,7 @@ def extract_company_names(text):
     prompt = f"请提取以下文本中的公司名称：{text} 只输出文本中的公司名称，不要输出其他不相关的内容。如果文本中有多个公司名称，依次输出所有的公司名称，并用“、”分隔。"
 
     # 调用 GPT-4 模型
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
       model="gpt-4o-mini",
       messages=[
             {"role": "system", "content": "你是一个专业的数据标注人员。"},

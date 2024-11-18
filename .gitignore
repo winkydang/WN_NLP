@@ -140,6 +140,7 @@ content
 /test0814NER_chinese_roberta_wwm_ext/data
 /test0814NER_chinese_roberta_wwm_ext/model
 /test0814NER_chinese_roberta_wwm_ext/output
+/1_pdfRAG/data
 
 test0814NER_PROMPT/data
 test_tinyuniverse/transformers_main
