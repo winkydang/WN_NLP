@@ -144,3 +144,5 @@ content
 
 test0814NER_PROMPT/data
 test_tinyuniverse/transformers_main
+/pdfRAG/data/
+/LC/data/
