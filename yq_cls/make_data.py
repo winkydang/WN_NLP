@@ -67,7 +67,7 @@ df_save.to_csv(yq_file_path, index=False)  # 保存全部数据，包括进行�
 # # test: 将requirements.txt文件中的换行符替换为空格
 # import os
 #
-# from config import BASE_DIR
+# from configs import BASE_DIR
 #
 # file_path = os.path.join(BASE_DIR, 'yq_cls/requirements.txt')
 # with open(file_path, 'r') as file:

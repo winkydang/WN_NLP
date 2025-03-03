@@ -23,7 +23,7 @@ class EmotionCLS(BertPreTrainedModel):
 
         # Init the bert encoder    # 初始化bert模型
         self.bert = BertModel(config)
-        # classifier_dropout = (config.hidden_dropout_prob)
+        # classifier_dropout = (configs.hidden_dropout_prob)
         classifier_dropout = (
             config.hidden_dropout_prob if config.hidden_dropout_prob is not None else 0.1
         )

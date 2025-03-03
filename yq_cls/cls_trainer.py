@@ -46,7 +46,7 @@ class ClsTrainer:
         # Init optimizer. Note that we copied the implementation of Adaom from the original torch lib.
         base_optimizer = Adam(self.model.parameters(), lr=self.config.lr, weight_decay=0.01)
         # Set up optimizer for learning rate scheduling with warmup
-        if hasattr(self.model, 'config'):
+        if hasattr(self.model, 'configs'):
             self.optimizer = NoamOpt(self.model.config.hidden_size, 0.1, self.config.lr_warmup, base_optimizer)
         else:
             self.optimizer = NoamOpt(self.model.module.config.hidden_size, 0.1, self.config.lr_warmup, base_optimizer)
